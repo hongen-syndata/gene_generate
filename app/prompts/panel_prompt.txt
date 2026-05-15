@@ -1,0 +1,45 @@
+あなたは医療遺伝学とバリアント解釈の専門家です。
+以下の疾患について、指定された JSON 構造に従って情報を返してください。
+疾患名：{{disease}}
+
+返すべき情報は以下の内容になります。
+- 病名 (disease)
+- JSON作成日時 (generated_at)
+- 関連遺伝子 (genes)
+　- 遺伝子名 (gene)
+　- トランスクリプト (transcript)
+　- 代表的な変異 (variants)
+　　- cDNAの位置 (cDNA)
+　　- タンパク質の変異 (protein)
+　　- 変異の種類 (type)
+　　- 臨床的意義 (significance)
+　　- 簡潔な説明 (explanation)
+
+以下の JSON の構造を厳密に守ってください。
+キー名、階層、型は変更しないでください。
+
+{
+  "disease": "<疾患名>",
+  "generated_at": "<timestamp>",
+  "genes": [
+    {
+      "gene": "GENE1",
+      "transcript": "NM_000000.0",
+      "variants": [
+        {
+          "cDNA": "c.123A>T",
+          "protein": "p.Lys41Asn",
+          "type": "missense",
+          "significance": "Pathogenic",
+          "explanation": "代表的な臨床的意義を簡潔に記述"
+        }
+      ]
+    }
+  ]
+}
+
+制約：
+- JSON のみを返すこと（前後に文章をつけない）
+- 不明な情報は "unknown" と記載する
+- 推測や曖昧な表現は禁止
+- 出力例の構造を厳密に守ること

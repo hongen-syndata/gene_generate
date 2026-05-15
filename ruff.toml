@@ -1,0 +1,27 @@
+# ruff.toml
+
+# 対象バージョン
+target-version = "py312"
+
+# チェックするルールセット
+lint.select = [
+  "E",   # pycodestyle (PEP8 エラー)
+  "F",   # pyflakes
+  "I",   # import 整理
+  "B",   # bugbear（バグになりやすい書き方）
+  "UP",  # Python バージョンアップ関連
+  "W",   # pycodestyle warnings（空白・改行）
+]
+
+# 無視したいルール（必要に応じて追加）
+lint.ignore = [
+  "E501",  # 行長（black で整えるなら無視もあり）
+]
+
+# import 自動整列
+lint.isort.combine-as-imports = true
+lint.isort.force-single-line = false
+
+# フォーマット関連（将来 ruff format を使うなら）
+line-length = 100
+

@@ -1,0 +1,39 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual environment ---
+.venv/
+venv/
+env/
+
+# --- Environment variables ---
+.env
+.env.*
+
+# --- VS Code ---
+.vscode/
+
+# --- OS files ---
+.DS_Store
+Thumbs.db
+
+# --- Logs ---
+*.log
+
+# --- Python packaging ---
+build/
+dist/
+*.egg-info/
+
+# --- Cache ---
+.cache/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# --- Project specific ---
+old/
