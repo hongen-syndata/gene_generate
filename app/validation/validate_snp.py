@@ -7,6 +7,9 @@ def validate_snp(snp: SNP) -> None:
     """
     Validate biological correctness of SNP information.
     """
+    # --- gene が空 ---
+    if not snp.gene or not snp.gene.strip():
+        raise ValueError("SNP.gene is empty")
 
     # --- 基本チェック ---
     valid_bases = {"A", "T", "C", "G", "-"}
@@ -22,9 +25,7 @@ def validate_snp(snp: SNP) -> None:
         "substitution": lambda ref, alt: (
             ref != "-" and alt != "-" and len(ref) == 1 and len(alt) == 1
         ),
-        "deletion": lambda ref, alt: (
-            ref in {"A", "T", "C", "G"} and alt == "-"
-        ),
+        "deletion": lambda ref, alt: ref in {"A", "T", "C", "G"} and alt == "-",
         # "insertion": lambda ref, alt: (ref == "-" and alt in {"A","T","C","G"}),
     }
 
@@ -34,8 +35,7 @@ def validate_snp(snp: SNP) -> None:
     # --- type ごとの整合性チェック ---
     if not type_rules[snp.type](snp.ref, snp.alt):
         raise ValueError(
-            f"ref/alt combination is invalid for type '{snp.type}' "
-            f"(ref={snp.ref}, alt={snp.alt})"
+            f"ref/alt combination is invalid for type '{snp.type}' (ref={snp.ref}, alt={snp.alt})"
         )
 
     # --- pos チェック ---

@@ -14,7 +14,7 @@ def test_normalize_panel_basic():
                     SVariant(
                         cDNA="c.123A>T",
                         protein="p.Lys41Asn",
-                        type="substitution",
+                        type="missense",
                         significance="pathogenic",
                         explanation="test",
                     )
@@ -35,4 +35,4 @@ def test_normalize_panel_basic():
     v = variants[0]
     assert v.gene == "BRCA1"
     assert v.cDNA == "c.123A>T"
-    assert v.type == "substitution"
+    assert v.type == "missense"

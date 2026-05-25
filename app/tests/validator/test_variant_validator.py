@@ -9,7 +9,7 @@ def test_validate_variant_substitution_ok():
         gene="BRCA1",
         cDNA="c.123A>T",
         protein="p.Lys41Asn",
-        type="substitution",
+        type="missense",
         significance="pathogenic",
         explanation="test",
     )
@@ -21,7 +21,7 @@ def test_validate_variant_deletion_ok():
         gene="BRCA1",
         cDNA="c.123delA",
         protein=None,
-        type="deletion",
+        type="nonsense",
         significance=None,
         explanation=None,
     )
