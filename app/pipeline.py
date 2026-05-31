@@ -13,9 +13,6 @@ from app.validator.sequence_validator import validate_sequence
 from app.validator.snp_validator import validate_snp
 from app.validator.variant_validator import validate_variant
 
-# DB 初期化（テーブル作成）
-Base.metadata.create_all(bind=engine)
-# ★★★★★★★★★★★★★★★★
 
 
 def run_pipeline(disease: str, session: Session) -> int:
