@@ -15,3 +15,4 @@ ENV PORT=8000
 # FastAPI を起動
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
 
+# force rebuild
