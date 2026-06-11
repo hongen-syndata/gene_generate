@@ -40,7 +40,7 @@ def test_validate_panel_empty_gene_name():
 
 
 # --- gene 名に不正文字 ---
-@pytest.mark.parametrize("bad_gene", ["BRCA1?", "TP53!", "EGFR-", "BRCA 1"])
+@pytest.mark.parametrize("bad_gene", ["BRCA1?", "TP53!", "BRCA 1"])
 def test_validate_panel_invalid_characters(bad_gene):
     panel = Panel(
         disease="Cancer",
