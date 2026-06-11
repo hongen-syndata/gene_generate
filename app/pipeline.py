@@ -1,12 +1,13 @@
 from sqlalchemy.orm import Session
 
-from app.db.base import Base, engine
 from app.db.repository import save_all
 from app.schemas.panel import Panel
+from app.schemas.result import PipelineResult
 from app.services.generate_panel import generate_panel
 from app.services.generate_sequence import generate_sequence
 from app.services.generate_snp import generate_snp
 from app.services.normalize_panel import normalize_panel
+from app.services.result_builder import build_result
 from app.validation.validate_panel import validate_panel
 from app.validator.gene_validator import validate_gene
 from app.validator.sequence_validator import validate_sequence
@@ -14,12 +15,11 @@ from app.validator.snp_validator import validate_snp
 from app.validator.variant_validator import validate_variant
 
 
-
-def run_pipeline(disease: str, session: Session) -> int:
+def run_pipeline(disease: str, session: Session) -> PipelineResult:
     """
     Full pipeline:
     disease → panel(JSON) → internal models → SNP → sequence → DB保存
-    Returns: panel_id
+    Returns: PipelineResult（疾患名 + 遺伝子名/臨床的意義/塩基配列(ALT)）
     """
 
     # ① パネル生成（LLM）
@@ -71,4 +71,6 @@ def run_pipeline(disease: str, session: Session) -> int:
     )
 
     print("完了しました。")
-    return sequences
+
+    # ⑩ 最終出力モデルへ整形（疾患名 + 遺伝子名/臨床的意義/塩基配列(ALT)）
+    return build_result(panel_json.disease, variants, sequences)

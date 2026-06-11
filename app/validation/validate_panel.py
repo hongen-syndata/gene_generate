@@ -9,7 +9,7 @@ def validate_panel(panel: Panel) -> None:
         raise ValueError("Panel contains no genes")
 
     # 正規表現（A-Z, 0-9, _ のみ許可）
-    pattern = re.compile(r"^[A-Za-z0-9_]+$")
+    pattern = re.compile(r"^[A-Za-z0-9._\-]+$")
 
     seen = set()
 
