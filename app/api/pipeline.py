@@ -1,12 +1,14 @@
 from app.db.session import get_session
 from app.pipeline import run_pipeline  # ← 後で移動する
+from app.services.result_builder import render_formatted
 
 
 def run_pipeline_api(disease: str):
     with get_session() as session:
-        sequences = run_pipeline(disease, session)
+        result = run_pipeline(disease, session)
         return {
-            "count": len(sequences),
-            "first_alt": sequences[0].fasta_alt,
-            "first_ref": sequences[0].fasta_ref,
+            "disease": result.disease,
+            "count": len(result.results),
+            "results": [r.model_dump() for r in result.results],
+            "formatted": render_formatted(result),
         }
